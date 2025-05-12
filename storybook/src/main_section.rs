@@ -27,6 +27,7 @@ impl Component for Main {
                 state.article_title.set(title);
                 state.article_content.set(content);
             }
+            Message::ArticleTitlesLoaded(_titles) => (),
         }
     }
 }

@@ -1,4 +1,4 @@
-use std::fs::read_to_string;
+use std::{fs::read_to_string, thread::spawn};
 
 use anathema::{
     prelude::{Backend, Document, ToSourceKind, TuiBackend},
@@ -6,8 +6,12 @@ use anathema::{
 };
 use storybook::{
     app::{App, AppState},
-    articles::article_titles::{ArticleTitles, ArticleTitlesState},
+    articles::{
+        article_titles::{ArticleTitles, ArticleTitlesState},
+        get_article_titles,
+    },
     main_section::{Main, MainState},
+    messages::Message,
     stories::article_title::ArticleTitle,
 };
 
@@ -32,7 +36,7 @@ fn main() {
     builder
         .component("main", "templates/main.aml", Main, MainState::new())
         .unwrap();
-    builder
+    let app_id = builder
         .component("app", "templates/app.aml", App, AppState::new().unwrap())
         .unwrap();
     builder.template("left_menu", left_menu_template.to_template());
@@ -54,6 +58,16 @@ fn main() {
         )
         .unwrap();
     builder.template("article", article_template);
+
+    let emitter = builder.emitter();
+
+    let _load_filenames_handle = spawn(move || {
+        let article_names = get_article_titles().unwrap();
+
+        emitter
+            .emit(app_id, Message::ArticleTitlesLoaded(article_names))
+            .unwrap();
+    });
 
     builder.finish(|runtime| runtime.run(&mut backend)).unwrap();
 }

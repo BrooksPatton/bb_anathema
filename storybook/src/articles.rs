@@ -1,11 +1,9 @@
 pub mod article_titles;
 
+use eyre::{Context, Result, bail};
 use std::fs::{ReadDir, read_dir, read_to_string};
 
-use eyre::{Context, Result, bail};
-
 pub fn get_article_titles() -> Result<Vec<String>> {
-    println!("reading article titles");
     let directory = read_dir("articles").context("reading articles directory")?;
     let mut titles = vec![];
 
@@ -19,7 +17,6 @@ pub fn get_article_titles() -> Result<Vec<String>> {
 
         titles.push(title);
     }
-    println!("finished reading article titles");
 
     Ok(titles)
 }
