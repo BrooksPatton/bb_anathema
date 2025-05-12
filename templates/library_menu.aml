@@ -1,0 +1,6 @@
+vstack
+	hstack
+		spacer
+		text "LIBRARY"
+		spacer
+	text "text"
