@@ -1,2 +1,2 @@
 vstack
-	text "meowmeow"
+	text attributes.content
