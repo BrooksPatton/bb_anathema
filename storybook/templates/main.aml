@@ -1,1 +1,4 @@
-text "main"
+if state.route == "article"
+	@article
+else
+	text "Welcome to Anathema Storybook"

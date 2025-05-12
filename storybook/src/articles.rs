@@ -22,7 +22,6 @@ pub fn get_article_titles() -> Result<Vec<String>> {
 }
 
 pub fn get_article_content(name: &str) -> Result<Option<String>> {
-    println!("reading article content for article {name}");
     let directory =
         get_articles_directory().context("getting articles directory in get_article_content")?;
 
@@ -36,16 +35,13 @@ pub fn get_article_content(name: &str) -> Result<Option<String>> {
             let path = object.path();
             let content = read_to_string(path).context("reading article content")?;
 
-            println!("found article content");
             return Ok(Some(content));
         }
     }
 
-    println!("didn't find article content");
     Ok(None)
 }
 
 pub fn get_articles_directory() -> Result<ReadDir> {
-    println!("getting articles directory");
     read_dir("articles").context("reading articles directory")
 }

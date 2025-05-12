@@ -17,19 +17,15 @@ impl Component for App {
         &mut self,
         message: Self::Message,
         state: &mut Self::State,
-        mut children: anathema::component::Children<'_, '_>,
-        mut context: anathema::prelude::Context<'_, '_, Self::State>,
+        mut _children: anathema::component::Children<'_, '_>,
+        mut _context: anathema::prelude::Context<'_, '_, Self::State>,
     ) {
         match message {
             Message::ArticleTitleClicked(_article_title) => (),
             Message::ArticleTitlesLoaded(article_titles) => {
-                let mut wrapped_article_titles = List::empty();
-
                 article_titles
                     .into_iter()
-                    .for_each(|title| wrapped_article_titles.push(title));
-
-                state.article_titles.set(wrapped_article_titles);
+                    .for_each(|title| state.article_titles.push(title));
             }
         }
     }
