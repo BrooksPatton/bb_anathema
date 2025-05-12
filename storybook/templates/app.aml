@@ -1,3 +1,0 @@
-hstack
-	@left_menu [article_titles: state.article_titles]
-	@main
