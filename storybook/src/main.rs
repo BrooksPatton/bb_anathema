@@ -22,7 +22,7 @@ fn main() {
 
     let doc = Document::new("@app [meow: 5]");
     let mut backend = TuiBackend::builder()
-        // .enable_alt_screen()
+        .enable_alt_screen()
         .enable_mouse()
         .enable_raw_mode()
         .hide_cursor()
@@ -50,11 +50,11 @@ fn main() {
         )
         .unwrap();
     builder
-        .component(
+        .prototype(
             "article_title",
             "templates/article_title.aml",
-            ArticleTitle,
-            (),
+            || ArticleTitle,
+            || (),
         )
         .unwrap();
     builder.template("article", article_template.to_template());
