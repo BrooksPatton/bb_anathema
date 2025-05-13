@@ -20,6 +20,7 @@ impl Component for ArticleTitle {
                 .elements()
                 .at_pos(mouse.pos())
                 .first(|_elements, attributes| {
+                    println!("{}-{}::::::::::", mouse.x, mouse.y);
                     let title = attributes
                         .get("title")
                         .unwrap()
