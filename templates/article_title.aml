@@ -1,1 +1,1 @@
-text [title: attributes.title] attributes.title
+text [title: attributes.title, foreground: attributes.color] attributes.title

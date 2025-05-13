@@ -12,7 +12,7 @@ use storybook::{
     },
     main_section::{Main, MainState},
     messages::Message,
-    stories::article_title::ArticleTitle,
+    stories::article_title::{ArticleTitle, ArticleTitleState},
 };
 
 fn main() {
@@ -54,7 +54,7 @@ fn main() {
             "article_title",
             "templates/article_title.aml",
             || ArticleTitle,
-            || (),
+            || ArticleTitleState::new(),
         )
         .unwrap();
     builder.template("article", article_template.to_template());

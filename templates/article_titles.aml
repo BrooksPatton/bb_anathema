@@ -5,4 +5,8 @@ vstack
             text [text_align: "center"] "ARTICLES"
         spacer
     for title in attributes.titles
-        @article_title [title: title]
+        text ":: " state.selected_article " == " title
+        if state.selected_article == title
+            @article_title [title: title, color: "red"]
+        else
+            @article_title [title: title, color: "white"]
